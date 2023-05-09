@@ -15,6 +15,8 @@ import SearchField from './SearchField';
 import NoteSkeleton from './NoteSkeleton';
 import NoteListSkeleton from './NoteListSkeleton';
 
+import { App as SendbirdApp } from "@sendbird/uikit-react";
+
 export default function App({selectedId, isEditing, searchText}) {
   return (
     <div className="main">
@@ -40,10 +42,15 @@ export default function App({selectedId, isEditing, searchText}) {
           </Suspense>
         </nav>
       </section>
-      <section key={selectedId} className="col note-viewer">
+      <section className="col note-viewer">
         <Suspense fallback={<NoteSkeleton isEditing={isEditing} />}>
           <Note selectedId={selectedId} isEditing={isEditing} />
         </Suspense>
+        <SendbirdApp
+            // Add the two lines below.
+            appId={'2D7B4CDB-932F-4082-9B09-A1153792DC8D'}   // Specify your Sendbird application ID.
+            userId={'USER_ID'}        // Specify your user ID.
+        />
       </section>
     </div>
   );
